@@ -1,7 +1,7 @@
 
 ### 1. Best Time to Buy / Sell Stock
 
-![buy-sell](SW-1.png)
+![SW-1](SW-1.png)
 <br>
 - initialize a ***left and right pointer*** for `buy and sell` day respectively
 
