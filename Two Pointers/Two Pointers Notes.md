@@ -34,7 +34,9 @@ TLDR :
 - *same l,r method but if total < target then l++ else r--*
 - 1-based index is asked 
 <br>
+
 ```python
+
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
         l, r = 0, len(numbers)-1
