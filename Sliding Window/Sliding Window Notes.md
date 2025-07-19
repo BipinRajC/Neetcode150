@@ -214,4 +214,13 @@ class Solution:
 
 ---
 
-### 6. 
+### 6.  Sliding Window Maximum 
+
+![SW-6](../assets/SW-6.png)
+<br>
+![SW-6-soln1](../assets/SW-6-soln1.png)
+
+<br>
+```python
+
+```
