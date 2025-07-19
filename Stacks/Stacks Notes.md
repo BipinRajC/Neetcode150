@@ -4,7 +4,6 @@
 ![S1](../assets/S1.png)
 <br>
 - use a hashmap with `closing parentheses` as key and `opening parentheses` as value, check if in hashmap then pop else dont
-<br>
 ```python
 class Solution:
     def isValid(self, s: str) -> bool:
@@ -64,7 +63,6 @@ class MinStack:
 ![S3](../assets/S3.png)
 <br>
 - no need for 2 stacks for operands and operators each like in **theory of computation**, calm down ***dont overthink like an idiot***, keep it simple and ez
-<br>
 ```python
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
