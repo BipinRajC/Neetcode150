@@ -220,7 +220,6 @@ class Solution:
 <br>
 ![SW-6-soln1](../assets/SW-6-soln1.png)
 
-<br>
 ```python
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
