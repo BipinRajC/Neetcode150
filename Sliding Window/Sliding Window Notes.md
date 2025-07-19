@@ -1,7 +1,7 @@
 
 ### 1. Best Time to Buy / Sell Stock
 
-![buy-sell](SW-1.png)
+![SW-1](SW-1.png)
 <br>
 - initialize a ***left and right pointer*** for `buy and sell` day respectively
 
@@ -222,5 +222,25 @@ class Solution:
 
 <br>
 ```python
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        output = []
+        l=r=0
+        q = collections.deque()
 
+        while r < len(nums):
+            # pop small values from q 
+            while q and nums[q[-1]] < nums[r]:
+                q.pop()
+            q.append(r)
+
+            if l > q[0]:
+                q.popleft()
+            
+            if r+1 >= k:
+                output.append(nums[q[0]])
+                l+=1
+            r+=1
 ```
+
+---
