@@ -73,3 +73,63 @@ class Solution:
 
 ![BS3](../assets/BS3.png)
 
+- somewhere in the middle comes a `pivot element` after which the trend reverses
+- according to the condition, obviously the left part will be cut (acc to Binary search logic) and we get L=M+1 and search right 
+![BS3-soln1](../assets/BS3-soln1.png)
+
+```python
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        res = nums[0]
+
+        l,r = 0, len(nums)-1
+
+        while l<=r:
+            if nums[l] < nums[r]: # then not rotated and in proper sorted format (no more pivots)
+                res = min(res, nums[l])
+                break
+            mid = l + ((r-l)//2)
+            res = min(res, nums[mid])
+            # left sorted part
+            if nums[mid] >= nums[l]: # search towards right
+                l = mid+1
+            else: # search towards left
+                r = mid-1
+        return res
+```
+
+---
+
+### 4. Search in Rotated Sorted Array
+
+![BS4](../assets/BS4.png)
+- use the fact that the array is a rotated sorted array and adjust it for binary search 
+
+- if ***`L<=M`*** then M belongs to left sorted portion so ***search towards right*** (2 conditions separated by OR) else M belongs to right sorted portion so ***search towards left*** 
+
+![BS4-soln1](../assets/BS4-soln1.png)
+
+```python
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        l,r = 0, len(nums)-1
+        while l<=r:
+            m = l + ((r-l)//2)
+            if target == nums[m]:
+                return m
+            # left sorted portion
+            if nums[l] <= nums[m]:
+                if target > nums[m] or target < nums[l]: # search rightside
+                    l = m+1
+                else:
+                    r = m-1
+            # right sorted portion
+            else:
+                if target < nums[m] or target > nums[r]: #search leftside
+                    r = m-1
+                else:
+                    l = m+1
+        return -1
+```
+
+---
