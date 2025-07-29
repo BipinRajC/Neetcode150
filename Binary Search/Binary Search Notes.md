@@ -133,3 +133,42 @@ class Solution:
 ```
 
 ---
+
+### 5. Time Based Key Value Store
+
+![BS5](../assets/BS5.png)
+
+- this is a very logical and less code based solution, see the constraints it'll be given ***time is strictly increasing*** so direct O(log n) binary search
+- it's quite obvious because time can only go in one direction, that shi dont wait for no one
+- theres 2 functions, `get and set` --> GET will get closest timestamp value and SET will append to hashmap 
+
+![BS5-soln](../assets/BS5-soln.png)
+
+```python
+class TimeMap:
+    def __init__(self):
+        self.store = {} # key=string, value = [list of [value,timestamp]]
+
+    def set(self, key: str, value: str, timestamp: int) -> None:
+        if key not in self.store:
+            self.store[key] = []
+        self.store[key].append([value,timestamp])
+
+    def get(self, key: str, timestamp: int) -> str:
+        res = ""
+        values = self.store.get(key, []) # return key's values [value,timestamp] if values for it exist else return []
+
+        # binary search time
+        l, r = 0, len(values)-1
+        while l<=r:
+            mid = l + (r-l) // 2
+            if values[mid][1] <= timestamp:
+                res = values[mid][0]
+                l = mid+1
+            else:
+                r = mid-1
+        return res
+```
+
+---
+
