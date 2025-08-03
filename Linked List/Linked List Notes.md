@@ -69,3 +69,80 @@ class Solution:
         
         return d.next
 ```
+
+---
+### 3. Linked List Cycle 
+
+![LL3](../assets/LL3.png)
+
+- What i thought at first was, keep a ***hashmap*** and add node value to it everytime and if theres any repetition, then there is a cycle
+
+> But in case of duplicates in the LL how to handle, thats why i dropped the hashmap but turns out that we dont add the value of node, but the entire node itself to the hashmap, that way even duplicates wont matter
+> ***O(n) Time complexity***
+
+- `Floyd's algorithm`  - ***Fast and Slow pointers concept*** to detect if there exists a cycle 
+> ### This is a O(1) space complexity solution 
+
+![LL3-soln](../assets/LL3-soln.png)
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        slow,fast = head,head
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                return True
+        return False
+```
+
+---
+### 4. Reorder List
+
+![LL4](../assets/LL4.png)
+
+- we should do it in O(n) time compelxity and O(1) space complexity, meaning we should do it in-place
+- problem is we cant do `head.prev` there doesnt exist something like this in LL , so for ***2nd half of list***, we'll ***reverse the linked list*** and then go till `middle of the list` and stop  
+
+> NOTE : to detect middle of LL, ***take slow (at 0th position) and fast pointer (at 1st position)*** and move +1 and +2 accordingly and when ***fast.next is NULL*** then we have slow at middle position 
+
+![LL4-soln](../assets/LL4-soln.png)
+
+```python
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        slow,fast = head,head.next
+        # to find middle of list (slow's destination)
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        second = slow.next # temporary link storage
+        prev = slow.next = None # because at end, middle points to NULL
+
+        # reverse second part of list
+        while second:
+            tmp = second.next
+            second.next = prev
+            prev = second
+            second = tmp
+        
+        # merge the 2 halfs
+        first, second = head, prev # after reverse, prev will be the last node (new head after reverse)
+        while second:
+            tmp1, tmp2 = first.next, second.next
+            first.next = second
+            second.next = tmp1
+            first,second = tmp1,tmp2
+```
+
+---
+### 5. 
